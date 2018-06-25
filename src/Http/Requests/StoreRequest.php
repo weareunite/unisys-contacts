@@ -1,9 +1,9 @@
 <?php
 
-namespace Unite\Transactions\Http\Requests;
+namespace Unite\Contacts\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Unite\Transactions\Models\Invoice;
+use Unite\Contacts\Models\Contact;
 
 class StoreRequest extends FormRequest
 {
@@ -25,13 +25,22 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'type'                  => 'required|in:'.implode(',', Invoice::getTypes()),
-            'transaction_source_id' => 'required|integer|exists:transaction_sources,id',
-            'amount'                => 'required|numeric',
-            'variable_symbol'       => 'string|max:250|nullable',
-            'specific_symbol'       => 'string|max:250|nullable',
-            'description'           => 'string|max:250|nullable',
-            'posted_at'             => 'required|date_format:Y-m-d H:s',
+            'type'              => 'in:' . implode(',', Contact::getTypes()) . '|nullable',
+            'name'              => 'required|string|max:40',
+            'surname'           => 'string|max:40|nullable',
+            'company'           => 'string|max:40|nullable',
+            'street'            => 'string|max:40|nullable',
+            'zip'               => 'string|max:40|nullable',
+            'city'              => 'string|max:40|nullable',
+            'country_id'        => 'integer|exists:countries,id|nullable',
+            'reg_no'            => 'string|max:40|nullable',
+            'tax_no'            => 'string|max:40|nullable',
+            'vat_no'            => 'string|max:40|nullable',
+            'web'               => 'string|max:40|nullable',
+            'email'             => 'email|nullable',
+            'telephone'         => 'string|max:40|nullable',
+            'description'       => 'string|max:250|nullable',
+            'custom_properties' => 'json|nullable',
         ];
     }
 }

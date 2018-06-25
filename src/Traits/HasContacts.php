@@ -14,7 +14,7 @@ trait HasContacts
 
     /**
      * @param array $data
-     * @return \Unite\Contacts\Models\Invoice
+     * @return \Unite\Contacts\Models\Contact
      */
     public function addContact(array $data = [])
     {

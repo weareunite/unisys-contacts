@@ -13,6 +13,8 @@ class Contact extends Model
 
     protected $table = 'contacts';
 
+    const TYPE_DEFAULT = 'default';
+
     protected $fillable = [
         'type', 'name', 'surname', 'company', 'street', 'zip', 'city', 'country', 'reg_no', 'tax_no', 'vat_no',
         'web', 'email', 'telephone', 'description', 'custom_properties',
@@ -26,5 +28,12 @@ class Contact extends Model
     public function country()
     {
         return $this->belongsTo(Countries::class, 'country_id');
+    }
+
+    public static function getTypes()
+    {
+        return [
+            self::TYPE_DEFAULT,
+        ];
     }
 }
