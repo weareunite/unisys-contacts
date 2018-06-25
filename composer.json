@@ -1,0 +1,56 @@
+{
+  "name": "weareunite/unisys-contacts",
+  "description": "Unisys API module to add Contacts to models",
+  "keywords": [
+    "unite",
+    "weareunite",
+    "unisys",
+    "unisys-contacts"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/weareunite/unisys-contacts",
+  "authors": [
+    {
+      "name": "Vladimír Žilka",
+      "email": "vlado.zilka@weareunite.com",
+      "homepage": "https://weareunite.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "php": "^7.1",
+    "weareunite/unisys-api": "^1.0",
+    "webpatser/laravel-countries": "^1.5",
+    "illuminate/container": "~5.5.0|~5.6.0",
+    "illuminate/contracts": "~5.5.0|~5.6.0",
+    "illuminate/database": "~5.5.0|~5.6.0",
+    "illuminate/support": "~5.5.0|~5.6.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.2|^7.0",
+    "orchestra/testbench": "~3.5.0|~3.6.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Unite\\Contacts\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Unite\\Contacts\\Tests\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": "vendor/bin/phpunit"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Unite\\Contacts\\ContactsServiceProvider"
+      ]
+    }
+  }
+}

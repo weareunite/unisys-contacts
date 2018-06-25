@@ -1,0 +1,39 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
+
+class CreateContactsTables extends Migration
+{
+    public function up()
+    {
+        Schema::create('contacts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->morphs('subject');
+            $table->string('type');
+            $table->string('name');
+            $table->string('surname');
+            $table->string('company');
+            $table->string('street')->nullable();
+            $table->string('zip')->nullable();
+            $table->string('city')->nullable();
+            $table->integer('country_id')->unsigned();
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->string('reg_no')->nullable();
+            $table->string('tax_no')->nullable();
+            $table->string('vat_no')->nullable();
+            $table->string('web')->nullable();
+            $table->string('email')->nullable();
+            $table->string('telephone')->nullable();
+            $table->string('description')->nullable();
+            $table->json('custom_properties');
+            $table->timestamps();
+        });
+    }
+
+    public function down()
+    {
+        Schema::drop('contacts');
+    }
+}
