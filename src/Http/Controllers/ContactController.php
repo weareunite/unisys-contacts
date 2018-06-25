@@ -24,7 +24,7 @@ class ContactController extends Controller
      * Update
      *
      * @param $id
-     * @param \Unite\Invoices\Http\Requests\UpdateRequest $request
+     * @param \Unite\Contacts\Http\Requests\UpdateRequest $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function update($id, UpdateRequest $request)
