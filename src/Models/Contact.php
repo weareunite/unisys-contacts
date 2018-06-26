@@ -6,10 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Webpatser\Countries\Countries;
+use Unite\UnisysApi\Helpers\CustomProperty\HasCustomProperty;
+use Unite\UnisysApi\Helpers\CustomProperty\HasCustomPropertyTrait;
 
-class Contact extends Model
+class Contact extends Model implements HasCustomProperty
 {
     use LogsActivity;
+    use HasCustomPropertyTrait;
 
     protected $table = 'contacts';
 
@@ -18,6 +21,10 @@ class Contact extends Model
     protected $fillable = [
         'type', 'name', 'surname', 'company', 'street', 'zip', 'city', 'country', 'reg_no', 'tax_no', 'vat_no',
         'web', 'email', 'telephone', 'description', 'custom_properties',
+    ];
+
+    protected $casts = [
+        'custom_properties' => 'array',
     ];
 
     public function subject(): MorphTo
