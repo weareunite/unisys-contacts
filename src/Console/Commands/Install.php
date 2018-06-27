@@ -20,6 +20,8 @@ class Install extends InstallModuleCommand
 
         $this->call('migrate');
 
+        exec('composer dump-autoload');
+
         $this->call('db:seed', ['--class' => 'CountriesSeeder']);
 
         $this->call('vendor:publish', [
