@@ -2,39 +2,15 @@
 
 namespace Unite\Contacts\Console\Commands;
 
-use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\File;
+use Unite\UnisysApi\Console\InstallModuleCommand;
 
-class Install extends Command
+class Install extends InstallModuleCommand
 {
-    /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $signature = 'unisys-api:contacts:install';
+    protected $moduleName = 'contacts';
 
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Install contacts module to Unisys API';
+    protected $filesystem;
 
-    /*
-     * Execute the console command.
-     */
-    public function handle(Filesystem $files)
-    {
-        $this->info('Installing ...');
-
-        $this->install();
-
-        $this->info('UniSys module was installed');
-    }
-
-    private function install()
+    protected function install()
     {
         $this->call('vendor:publish', [
             '--provider' => 'Webpatser\\Countries\\CountriesServiceProvider'

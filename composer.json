@@ -41,7 +41,10 @@
     }
   },
   "scripts": {
-    "test": "vendor/bin/phpunit"
+    "test": "vendor/bin/phpunit",
+    "post-package-install": [
+      "@php artisan unisys-api:install:contacts"
+    ]
   },
   "config": {
     "sort-packages": true
