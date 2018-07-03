@@ -3,6 +3,7 @@
 namespace Unite\Contacts\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
+use Unite\Contacts\Models\Country;
 
 class CountryResource extends Resource
 {
@@ -14,7 +15,7 @@ class CountryResource extends Resource
      */
     public function toArray($request)
     {
-        /** @var \Webpatser\Countries\Countries $this->resource */
+        /** @var Country $this->resource */
         return [
             'id'                => $this->id,
             'capital'           => $this->capital,

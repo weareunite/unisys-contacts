@@ -5,7 +5,6 @@ namespace Unite\Contacts\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Webpatser\Countries\Countries;
 use Unite\UnisysApi\Helpers\CustomProperty\HasCustomProperty;
 use Unite\UnisysApi\Helpers\CustomProperty\HasCustomPropertyTrait;
 
@@ -34,7 +33,7 @@ class Contact extends Model implements HasCustomProperty
 
     public function country()
     {
-        return $this->belongsTo(Countries::class, 'country_id');
+        return $this->belongsTo(Country::class, 'country_id');
     }
 
     public static function getTypes()
