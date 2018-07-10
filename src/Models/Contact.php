@@ -42,4 +42,9 @@ class Contact extends Model implements HasCustomProperty
             self::TYPE_DEFAULT,
         ];
     }
+
+    public static function getDefaultType(): string
+    {
+        return self::TYPE_DEFAULT;
+    }
 }
