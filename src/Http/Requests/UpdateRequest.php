@@ -24,27 +24,23 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $allRules = [
-            'type'              => 'in:' . implode(',', Contact::getTypes()) . '|nullable',
-            'name'              => 'string|max:40',
-            'surname'           => 'string|max:40|nullable',
-            'company'           => 'string|max:40|nullable',
-            'street'            => 'string|max:40|nullable',
-            'zip'               => 'string|max:40|nullable',
-            'city'              => 'string|max:40|nullable',
-            'country_id'        => 'integer|exists:countries,id|nullable',
-            'reg_no'            => 'string|max:40|nullable',
-            'tax_no'            => 'string|max:40|nullable',
-            'vat_no'            => 'string|max:40|nullable',
-            'web'               => 'string|max:40|nullable',
-            'email'             => 'email|nullable',
-            'telephone'         => 'string|max:40|nullable',
-            'description'       => 'string|max:250|nullable',
-            'custom_properties' => 'json|nullable',
+        return [
+            'type'              => 'nullable|in:' . implode(',', Contact::getTypes()),
+            'name'              => 'required|string|max:40',
+            'surname'           => 'nullable|string|max:40',
+            'company'           => 'nullable|string|max:40',
+            'street'            => 'nullable|string|max:40',
+            'zip'               => 'nullable|string|max:40',
+            'city'              => 'nullable|string|max:40',
+            'country_id'        => 'nullable|integer|exists:countries,id',
+            'reg_no'            => 'nullable|string|max:40',
+            'tax_no'            => 'nullable|string|max:40',
+            'vat_no'            => 'nullable|string|max:40',
+            'web'               => 'nullable|string|max:40',
+            'email'             => 'nullable|email',
+            'telephone'         => 'nullable|string|max:40',
+            'description'       => 'nullable|string|max:250',
+            'custom_properties' => 'nullable|json',
         ];
-
-        $rules = isset($allRules[$this->name]) ? ['value' => $allRules[$this->name] ] : [];
-
-        return $rules;
     }
 }
