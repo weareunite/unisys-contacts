@@ -20,14 +20,14 @@ Route::group([
     Route::group(['as' => 'contact.', 'prefix' => 'contact'], function ()
     {
         Route::get('/',                             ['as' => 'list',                    'uses' => 'ContactController@list']);
-        Route::put('{id}',                          ['as' => 'update',                  'uses' => 'ContactController@update']);
-        Route::delete('{id}',                       ['as' => 'delete',                  'uses' => 'ContactController@delete']);
+        Route::put('{model}',                       ['as' => 'update',                  'uses' => 'ContactController@update']);
+        Route::delete('{model}',                    ['as' => 'delete',                  'uses' => 'ContactController@delete']);
     });
 
     Route::group(['as' => 'country.', 'prefix' => 'country'], function ()
     {
         Route::get('/',                             ['as' => 'list',                    'uses' => 'CountryController@list']);
-        Route::get('{id}',                          ['as' => 'show',                    'uses' => 'CountryController@show']);
+        Route::get('{model}',                       ['as' => 'show',                    'uses' => 'CountryController@show']);
         Route::get('getList',                       ['as' => 'getList',                 'uses' => 'CountryController@getList']);
         Route::get('getListForSelect',              ['as' => 'getListForSelect',        'uses' => 'CountryController@getListForSelect']);
     });

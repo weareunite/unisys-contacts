@@ -4,6 +4,7 @@ namespace Unite\Contacts\Http\Controllers;
 
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Unite\Contacts\Http\Resources\ContactResource;
+use Unite\Contacts\Models\Contact;
 use Unite\UnisysApi\Http\Controllers\Controller;
 use Unite\Contacts\Http\Requests\UpdateRequest;
 use Unite\Contacts\ContactRepository;
@@ -27,6 +28,7 @@ class ContactController extends Controller
      * List
      *
      * @param QueryRequest $request
+     *
      * @return AnonymousResourceCollection|ContactResource[]
      */
     public function list(QueryRequest $request)
@@ -39,19 +41,14 @@ class ContactController extends Controller
     /**
      * Update
      *
-     * @param $id
+     * @param Contact $model
      * @param \Unite\Contacts\Http\Requests\UpdateRequest $request
+     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($id, UpdateRequest $request)
+    public function update(Contact $model, UpdateRequest $request)
     {
-        if(!$object = $this->repository->find($id)) {
-            abort(404);
-        }
-
-        $data = $request->all();
-
-        $object->update($data);
+        $model->update( $request->all() );
 
         return $this->successJsonResponse();
     }
@@ -59,12 +56,13 @@ class ContactController extends Controller
     /**
      * Delete
      *
-     * @param $id
+     * @param Contact $model
+     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function delete($id)
+    public function delete(Contact $model)
     {
-        $this->repository->delete($id);
+        $model->delete();
 
         return $this->successJsonResponse();
     }

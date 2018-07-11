@@ -5,6 +5,7 @@ namespace Unite\Contacts\Http\Controllers;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Unite\Contacts\CountryRepository;
 use Unite\Contacts\Http\Resources\CountryResource;
+use Unite\Contacts\Models\Country;
 use Unite\UnisysApi\Http\Controllers\Controller;
 use Unite\UnisysApi\Http\Requests\QueryRequest;
 
@@ -38,15 +39,13 @@ class CountryController extends Controller
     /**
      * Returns one country
      *
-     * @param integer $id
+     * @param Country $model
      *
      * @return CountryResource
      */
-    public function show(int $id)
+    public function show(Country $model)
     {
-        $object = $this->repository->getOne($id);
-
-        return new CountryResource($object);
+        return new CountryResource($model);
     }
 
     /**
