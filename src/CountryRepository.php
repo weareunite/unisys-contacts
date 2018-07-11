@@ -36,4 +36,12 @@ class CountryRepository extends Repository
     {
         return $this->getQueryBuilder()->getListForSelect($display);
     }
+
+    public function getByName(string $name)
+    {
+        return $this->getQueryBuilder()
+            ->where('name', '=', $name)
+            ->first();
+
+    }
 }
