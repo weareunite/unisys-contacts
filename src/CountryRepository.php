@@ -32,9 +32,11 @@ class CountryRepository extends Repository
      * Returns a list of countries suitable to use with a select element in Laravelcollective\html
      * Will show the value and sort by the column specified in the display attribute
      */
-    public function getListForSelect(string $display = 'name')
+    public function getListForSelect()
     {
-        return $this->getQueryBuilder()->getListForSelect($display);
+        return $this->getQueryBuilder()
+            ->orderBy('name', 'asc')
+            ->get(['id', 'name']);
     }
 
     public function getByName(string $name)

@@ -48,15 +48,4 @@ class Contact extends Model implements HasCustomProperty
     {
         return self::TYPE_DEFAULT;
     }
-
-    public function setCountryAttribute(string $value)
-    {
-        $country_id = Country::DEFAULT_COUNTRY_ID;
-
-        if($country = app(CountryRepository::class)->getByName($value)) {
-            $country_id = $country->id;
-        }
-
-        $this->attributes['country_id'] = $country_id;
-    }
 }

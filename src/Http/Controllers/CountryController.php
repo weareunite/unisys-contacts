@@ -4,6 +4,7 @@ namespace Unite\Contacts\Http\Controllers;
 
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Unite\Contacts\CountryRepository;
+use Unite\Contacts\Http\Resources\CountryForSelectResource;
 use Unite\Contacts\Http\Resources\CountryResource;
 use Unite\Contacts\Models\Country;
 use Unite\UnisysApi\Http\Controllers\Controller;
@@ -37,7 +38,7 @@ class CountryController extends Controller
     }
 
     /**
-     * Returns one country
+     * Show
      *
      * @param Country $model
      *
@@ -49,30 +50,15 @@ class CountryController extends Controller
     }
 
     /**
-     * Returns a list of countries
+     * List for select
      *
-     * @return AnonymousResourceCollection|CountryResource[]
+     * @return AnonymousResourceCollection|CountryForSelectResource[]
      */
-    public function getList()
-    {
-        $object = $this->repository->getList();
-
-        return CountryResource::collection($object);
-    }
-
-    /**
-     * Returns a list of countries
-     *
-     * suitable to use with a select element in Laravelcollective\html
-     * Will show the value and sort by the column specified in the display attribute
-     *
-     * @return array
-     */
-    public function getListForSelect()
+    public function listForSelect()
     {
         $object = $this->repository->getListForSelect();
 
-        return $object;
+        return CountryForSelectResource::collection($object);
     }
 
 }
