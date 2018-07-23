@@ -2,10 +2,14 @@
 
 namespace Unite\Contacts\Http\Resources;
 
-use Illuminate\Http\Resources\Json\Resource;
+use Unite\UnisysApi\Http\Resources\Resource;
 
 class ContactResource extends Resource
 {
+    protected static $relations = [
+        'country',
+    ];
+
     /**
      * Transform the resource into an array.
      *
@@ -17,7 +21,6 @@ class ContactResource extends Resource
         /** @var \Unite\Contacts\Models\Contact $this->resource */
         return [
             'id'                => $this->id,
-            'subject'           => $this->subject,
             'type'              => $this->type,
             'name'              => $this->name,
             'surname'           => $this->surname,

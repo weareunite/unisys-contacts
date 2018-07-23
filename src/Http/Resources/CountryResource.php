@@ -2,8 +2,8 @@
 
 namespace Unite\Contacts\Http\Resources;
 
-use Illuminate\Http\Resources\Json\Resource;
 use Unite\Contacts\Models\Country;
+use Unite\UnisysApi\Http\Resources\Resource;
 
 class CountryResource extends Resource
 {
