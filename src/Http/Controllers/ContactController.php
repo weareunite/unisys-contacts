@@ -33,7 +33,7 @@ class ContactController extends Controller
      */
     public function list(QueryRequest $request)
     {
-        $object = $this->repository->filterByRequest($request);
+        $object = $this->repository->with(ContactResource::getRelations())->filterByRequest( $request->all() );
 
         return ContactResource::collection($object);
     }
