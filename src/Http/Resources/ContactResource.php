@@ -6,10 +6,6 @@ use Unite\UnisysApi\Http\Resources\Resource;
 
 class ContactResource extends Resource
 {
-    protected static $relations = [
-        'country',
-    ];
-
     /**
      * Transform the resource into an array.
      *

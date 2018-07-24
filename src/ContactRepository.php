@@ -8,4 +8,8 @@ use Unite\Contacts\Models\Contact;
 class ContactRepository extends Repository
 {
     protected $modelClass = Contact::class;
+
+    protected $resourceRelations = [
+        'country',
+    ];
 }

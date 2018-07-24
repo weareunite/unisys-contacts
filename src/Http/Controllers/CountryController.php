@@ -32,7 +32,7 @@ class CountryController extends Controller
      */
     public function list(QueryRequest $request)
     {
-        $object = $this->repository->with(CountryResource::getRelations())->filterByRequest( $request->all() );
+        $object = $this->repository->with($this->repository->getResourceRelations())->filterByRequest( $request->all() );
 
         return CountryResource::collection($object);
     }
