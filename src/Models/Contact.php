@@ -20,7 +20,7 @@ class Contact extends Model implements HasCustomProperty
 
     protected $fillable = [
         'type', 'name', 'surname', 'company', 'street', 'zip', 'city', 'country_id', 'reg_no', 'tax_no', 'vat_no',
-        'web', 'email', 'telephone', 'description', 'custom_properties' => '{}',
+        'web', 'email', 'telephone', 'description', 'custom_properties',
     ];
 
     protected $casts = [

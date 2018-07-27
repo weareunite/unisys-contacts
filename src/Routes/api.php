@@ -27,7 +27,7 @@ Route::group([
     Route::group(['as' => 'country.', 'prefix' => 'country'], function ()
     {
         Route::get('/',                             ['as' => 'list',                    'uses' => 'CountryController@list']);
-        Route::get('{model}',                       ['as' => 'show',                    'uses' => 'CountryController@show']);
         Route::get('listForSelect',                 ['as' => 'listForSelect',           'uses' => 'CountryController@listForSelect']);
+        Route::get('{model}',                       ['as' => 'show',                    'uses' => 'CountryController@show']);
     });
 });

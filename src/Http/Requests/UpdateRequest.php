@@ -40,7 +40,7 @@ class UpdateRequest extends FormRequest
             'email'             => 'nullable|email',
             'telephone'         => 'nullable|string|max:40',
             'description'       => 'nullable|string|max:250',
-            'custom_properties' => 'nullable|string',
+            'custom_properties' => 'nullable|array',
         ];
     }
 }
