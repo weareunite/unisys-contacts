@@ -62,7 +62,11 @@ class ContactController extends Controller
      */
     public function delete(Contact $model)
     {
-        $model->delete();
+        try {
+            $model->delete();
+        } catch(\Exception $e) {
+            abort(409, 'Cannot delete record');
+        }
 
         return $this->successJsonResponse();
     }
