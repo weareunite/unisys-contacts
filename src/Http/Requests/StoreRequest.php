@@ -26,9 +26,9 @@ class StoreRequest extends FormRequest
     {
         return [
             'type'              => 'nullable|in:' . implode(',', Contact::getTypes()),
-            'name'              => 'required|string|max:40',
+            'name'              => 'nullable|string|max:40',
             'surname'           => 'nullable|string|max:40',
-            'company'           => 'nullable|string|max:40',
+            'company'           => 'required|string|max:40',
             'street'            => 'nullable|string|max:40',
             'zip'               => 'nullable|string|max:40',
             'city'              => 'nullable|string|max:40',

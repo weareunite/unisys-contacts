@@ -12,9 +12,9 @@ class CreateContactsTables extends Migration
             $table->increments('id');
             $table->morphs('subject');
             $table->string('type')->nullable();
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('surname')->nullable();
-            $table->string('company')->nullable();
+            $table->string('company');
             $table->string('street')->nullable();
             $table->string('zip')->nullable();
             $table->string('city')->nullable();
