@@ -8,7 +8,8 @@ use Unite\Contacts\Models\Contact;
 use Unite\UnisysApi\Http\Controllers\Controller;
 use Unite\Contacts\Http\Requests\UpdateRequest;
 use Unite\Contacts\ContactRepository;
-use Unite\UnisysApi\Http\Requests\QueryRequest;
+use Unite\UnisysApi\QueryBuilder\QueryBuilder;
+use Unite\UnisysApi\QueryBuilder\QueryBuilderRequest;
 
 /**
  * @resource Contact
@@ -27,13 +28,13 @@ class ContactController extends Controller
     /**
      * List
      *
-     * @param QueryRequest $request
+     * @param QueryBuilderRequest $request
      *
      * @return AnonymousResourceCollection|ContactResource[]
      */
-    public function list(QueryRequest $request)
+    public function list(QueryBuilderRequest $request)
     {
-        $object = $this->repository->with($this->repository->getResourceRelations())->filterByRequest( $request->all() );
+        $object = QueryBuilder::for($this->repository, $request)->paginate();
 
         return ContactResource::collection($object);
     }

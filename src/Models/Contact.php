@@ -2,12 +2,11 @@
 
 namespace Unite\Contacts\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Unite\Contacts\CountryRepository;
 use Unite\UnisysApi\Helpers\CustomProperty\HasCustomProperty;
 use Unite\UnisysApi\Helpers\CustomProperty\HasCustomPropertyTrait;
+use Unite\UnisysApi\Models\Model;
 
 class Contact extends Model implements HasCustomProperty
 {
@@ -25,6 +24,10 @@ class Contact extends Model implements HasCustomProperty
 
     protected $casts = [
         'custom_properties' => 'array',
+    ];
+
+    protected $resourceEagerLoads = [
+        'country',
     ];
 
     public function subject(): MorphTo
