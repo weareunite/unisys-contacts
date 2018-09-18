@@ -25,6 +25,7 @@ class ContactResource extends Resource
             'zip'               => $this->zip,
             'city'              => $this->city,
             'country'           => new CountryResource($this->country),
+            'abroad'            => $this->isAbroad(),
             'reg_no'            => $this->reg_no,
             'tax_no'            => $this->tax_no,
             'vat_no'            => $this->vat_no,

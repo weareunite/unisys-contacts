@@ -2,6 +2,7 @@
 
 namespace Unite\Contacts\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Unite\Contacts\Http\Resources\ContactResource;
 use Unite\Contacts\Models\Contact;
@@ -10,6 +11,7 @@ use Unite\Contacts\Http\Requests\UpdateRequest;
 use Unite\Contacts\ContactRepository;
 use Unite\UnisysApi\QueryBuilder\QueryBuilder;
 use Unite\UnisysApi\QueryBuilder\QueryBuilderRequest;
+use Unite\UnisysApi\Services\SettingService;
 
 /**
  * @resource Contact
@@ -34,7 +36,25 @@ class ContactController extends Controller
      */
     public function list(QueryBuilderRequest $request)
     {
-        $object = QueryBuilder::for($this->repository, $request)->paginate();
+        $company = app(SettingService::class)->companyProfile(['id', 'country_id']);
+
+        $virtualFields = [
+            'contacts.abroad' => function (Builder &$query, $value) use ($company){
+                if($value === 'yes') {
+                    $sql = 'contacts.country_id <> ' . $company->country_id;
+                } elseif ($value === 'no') {
+                    $sql = 'contacts.country_id = ' . $company->country_id;
+                } else {
+                    $sql = 'contacts.country_id = ' . $company->country_id;
+                }
+
+                return $query->orWhereRaw($sql);
+            }
+        ];
+
+        $object = QueryBuilder::for($this->repository, $request)
+            ->setVirtualFields($virtualFields)
+            ->paginate();
 
         return ContactResource::collection($object);
     }
