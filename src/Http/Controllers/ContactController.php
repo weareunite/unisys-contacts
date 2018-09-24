@@ -61,6 +61,8 @@ class ContactController extends Controller
     {
         $model->update( $request->all() );
 
+        \Cache::tags('response')->flush();
+
         return $this->successJsonResponse();
     }
 
@@ -78,6 +80,8 @@ class ContactController extends Controller
         } catch(\Exception $e) {
             abort(409, 'Cannot delete record');
         }
+
+        \Cache::tags('response')->flush();
 
         return $this->successJsonResponse();
     }
