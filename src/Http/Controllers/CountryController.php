@@ -23,19 +23,25 @@ class CountryController extends Controller
     public function __construct(CountryRepository $repository)
     {
         $this->repository = $repository;
+
+        $this->setResourceClass(CountryResource::class);
+
+        $this->setResponse();
+
+        $this->middleware('cache')->only(['list', 'show', 'listForSelect']);
     }
 
     /**
      * List
      *
      * @param QueryBuilderRequest $request
-     * @return AnonymousResourceCollection|CountryResource[]
+     * @return AnonymousResourceCollection|Resource[]
      */
     public function list(QueryBuilderRequest $request)
     {
         $object = QueryBuilder::for($this->repository, $request)->paginate();
 
-        return CountryResource::collection($object);
+        return $this->response->collection($object);
     }
 
     /**
@@ -43,11 +49,11 @@ class CountryController extends Controller
      *
      * @param Country $model
      *
-     * @return CountryResource
+     * @return Resource
      */
     public function show(Country $model)
     {
-        return new CountryResource($model);
+        return $this->response->resource($model);
     }
 
     /**
@@ -59,7 +65,6 @@ class CountryController extends Controller
     {
         $object = $this->repository->getListForSelect();
 
-        return CountryForSelectResource::collection($object);
+        return $this->response->collection($object, CountryForSelectResource::class);
     }
-
 }

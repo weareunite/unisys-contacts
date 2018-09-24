@@ -25,6 +25,12 @@ class ContactController extends Controller
     public function __construct(ContactRepository $repository)
     {
         $this->repository = $repository;
+
+        $this->setResourceClass(ContactResource::class);
+
+        $this->setResponse();
+
+        $this->middleware('cache')->only(['list']);
     }
 
     /**
@@ -36,27 +42,11 @@ class ContactController extends Controller
      */
     public function list(QueryBuilderRequest $request)
     {
-        $company = app(SettingService::class)->companyProfile(['id', 'country_id']);
-
-        $virtualFields = [
-            'contacts.abroad' => function (Builder &$query, $value) use ($company){
-                if($value === 'yes') {
-                    $sql = 'contacts.country_id <> ' . $company->country_id;
-                } elseif ($value === 'no') {
-                    $sql = 'contacts.country_id = ' . $company->country_id;
-                } else {
-                    $sql = 'contacts.country_id = ' . $company->country_id;
-                }
-
-                return $query->orWhereRaw($sql);
-            }
-        ];
-
         $object = QueryBuilder::for($this->repository, $request)
-            ->setVirtualFields($virtualFields)
+            ->setVirtualFields($this->resource::virtualFields())
             ->paginate();
 
-        return ContactResource::collection($object);
+        return $this->response->collection($object);
     }
 
     /**
