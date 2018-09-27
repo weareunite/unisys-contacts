@@ -3,6 +3,7 @@
 namespace Unite\Contacts\Http\Resources;
 
 use Illuminate\Database\Eloquent\Builder;
+use Unite\Contacts\Models\Contact;
 use Unite\UnisysApi\Http\Resources\Resource;
 use Unite\UnisysApi\Services\SettingService;
 
@@ -39,10 +40,33 @@ class ContactResource extends Resource
         ];
     }
 
+    public static function modelClass()
+    {
+        return Contact::class;
+    }
+
+    public static function eagerLoads()
+    {
+        $with = [
+            'country',
+        ];
+
+        return parent::eagerLoads()->merge($with);
+    }
+
+    public static function resourceMap()
+    {
+        $map = [
+            'country' => CountryResource::class
+        ];
+
+        return parent::resourceMap()->merge($map);
+    }
+
     public static function virtualFields()
     {
         $virtualFields = [
-            'contacts.abroad' => function (Builder &$query, $value) {
+            'abroad' => function (Builder &$query, $value) {
                 $company = app(SettingService::class)->companyProfile(['id', 'country_id']);
 
                 if($value === 'yes') {
@@ -57,6 +81,6 @@ class ContactResource extends Resource
             }
         ];
 
-        return self::setVirtualFields($virtualFields);
+        return parent::virtualFields()->merge($virtualFields);
     }
 }

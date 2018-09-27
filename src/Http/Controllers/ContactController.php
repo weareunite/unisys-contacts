@@ -42,8 +42,7 @@ class ContactController extends Controller
      */
     public function list(QueryBuilderRequest $request)
     {
-        $object = QueryBuilder::for($this->repository, $request)
-            ->setVirtualFields($this->resource::virtualFields())
+        $object = QueryBuilder::for($this->resource, $request)
             ->paginate();
 
         return $this->response->collection($object);

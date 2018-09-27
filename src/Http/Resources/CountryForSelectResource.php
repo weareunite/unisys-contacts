@@ -21,4 +21,9 @@ class CountryForSelectResource extends Resource
             'name'              => $this->name,
         ];
     }
+
+    public static function modelClass()
+    {
+        return Country::class;
+    }
 }

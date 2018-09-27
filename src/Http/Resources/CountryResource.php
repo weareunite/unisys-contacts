@@ -37,4 +37,9 @@ class CountryResource extends Resource
             'flag'              => $this->flag,
         ];
     }
+
+    public static function modelClass()
+    {
+        return Country::class;
+    }
 }
