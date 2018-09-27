@@ -5,7 +5,6 @@ namespace Unite\Contacts\Http\Resources;
 use Illuminate\Database\Eloquent\Builder;
 use Unite\Contacts\Models\Contact;
 use Unite\UnisysApi\Http\Resources\Resource;
-use Unite\UnisysApi\Services\SettingService;
 
 class ContactResource extends Resource
 {
@@ -67,7 +66,7 @@ class ContactResource extends Resource
     {
         $virtualFields = [
             'abroad' => function (Builder &$query, $value) {
-                $company = app(SettingService::class)->companyProfile(['id', 'country_id']);
+                $company = app('companyProfile');
 
                 if($value === 'yes') {
                     $sql = 'contacts.country_id <> ' . $company->country_id;

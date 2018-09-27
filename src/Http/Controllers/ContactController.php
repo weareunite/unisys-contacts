@@ -11,7 +11,6 @@ use Unite\Contacts\Http\Requests\UpdateRequest;
 use Unite\Contacts\ContactRepository;
 use Unite\UnisysApi\QueryBuilder\QueryBuilder;
 use Unite\UnisysApi\QueryBuilder\QueryBuilderRequest;
-use Unite\UnisysApi\Services\SettingService;
 
 /**
  * @resource Contact

@@ -7,7 +7,6 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Unite\UnisysApi\Helpers\CustomProperty\HasCustomProperty;
 use Unite\UnisysApi\Helpers\CustomProperty\HasCustomPropertyTrait;
 use Unite\UnisysApi\Models\Model;
-use Unite\UnisysApi\Services\SettingService;
 
 class Contact extends Model implements HasCustomProperty
 {
@@ -25,10 +24,6 @@ class Contact extends Model implements HasCustomProperty
 
     protected $casts = [
         'custom_properties' => 'array',
-    ];
-
-    protected $resourceEagerLoads = [
-        'country',
     ];
 
     public function subject(): MorphTo
@@ -55,7 +50,7 @@ class Contact extends Model implements HasCustomProperty
 
     public function isAbroad()
     {
-        $company = app(SettingService::class)->companyProfile(['id', 'country_id']);
+        $company = app('companyProfile');
 
         return $this->country_id !== $company->country_id;
     }
