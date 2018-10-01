@@ -3,7 +3,6 @@
 namespace Unite\Contacts;
 
 use Illuminate\Support\ServiceProvider;
-use Route;
 use Unite\Contacts\Console\Commands\Install;
 
 class ContactsServiceProvider extends ServiceProvider
@@ -13,10 +12,6 @@ class ContactsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Route::patterns([
-            'id'    => '^\d+$',
-            'model' => '^\d+$',
-        ]);
         $this->commands([
             Install::class,
         ]);
