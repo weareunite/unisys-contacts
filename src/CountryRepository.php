@@ -36,7 +36,9 @@ class CountryRepository extends Repository
     {
         return $this->getQueryBuilder()
             ->orderBy('name', 'asc')
-            ->get(['id', 'name']);
+            ->get(['id', 'name'])
+            ->pluck('name', 'id')
+            ->toArray();
     }
 
     public function getByName(string $name)
