@@ -63,8 +63,9 @@ class CountryController extends Controller
      */
     public function listForSelect()
     {
-        return $this->repository->getListForSelect();
+        $object = Country::orderBy('name', 'asc')
+            ->get(['id', 'name']);
 
-//        return $this->response->collection($object, CountryForSelectResource::class);
+        return $this->response->collection($object, CountryForSelectResource::class);
     }
 }
