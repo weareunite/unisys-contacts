@@ -26,10 +26,10 @@ class UpdateRequest extends FormRequest
     {
         return [
             'type'              => 'nullable|in:' . implode(',', Contact::getTypes()),
-            'name'              => 'nullable|string|max:50',
-            'surname'           => 'nullable|string|max:50',
-            'company'           => 'required|string|max:50',
-            'street'            => 'nullable|string|max:50',
+            'name'              => 'nullable|string|max:100',
+            'surname'           => 'nullable|string|max:100',
+            'company'           => 'required|string|max:100',
+            'street'            => 'nullable|string|max:100',
             'zip'               => 'nullable|string|max:40',
             'city'              => 'nullable|string|max:50',
             'country_id'        => 'nullable|integer|exists:countries,id',
