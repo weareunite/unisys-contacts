@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Unite\UnisysApi\Helpers\CustomProperty\HasCustomProperty;
 use Unite\UnisysApi\Helpers\CustomProperty\HasCustomPropertyTrait;
+use Unite\UnisysApi\Models\HasInstance;
 use Unite\UnisysApi\Models\Model;
 
 class Contact extends Model implements HasCustomProperty
 {
     use LogsActivity;
     use HasCustomPropertyTrait;
+    use HasInstance;
 
     protected $table = 'contacts';
 
